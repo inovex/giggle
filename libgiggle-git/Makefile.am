@@ -62,7 +62,9 @@ libgiggle_git_HEADERS = \
 	$(NULL)
 
 libgiggle_git_la_LIBADD = \
-	../libgiggle/libgiggle.la
+	../libgiggle/libgiggle.la \
+	$(GIGGLE_LIBS)
+
 libgiggle_git_la_LDFLAGS = \
 	$(AM_LDFLAGS) \
 	-version-info $(LIBGIGGLE_GIT_ABI) \
