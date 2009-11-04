@@ -20,6 +20,8 @@ intltool-update.in
 mkinstalldirs
 .*.sw?
 *.o
+*.lo
+*.la
 .deps
 .libs
 .project
