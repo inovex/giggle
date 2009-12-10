@@ -203,8 +203,10 @@ giggle_view_terminal_append_tab (GiggleViewTerminal *view,
 	/*FIXME:gtk_notebook_set_show_tabs (GTK_NOTEBOOK (priv->notebook), i > 0);*/
 	gtk_notebook_set_current_page (GTK_NOTEBOOK (priv->notebook), i);
 
-	gtk_notebook_set_tab_label_packing (GTK_NOTEBOOK (priv->notebook),
-                                            terminal, TRUE, TRUE, GTK_PACK_START);
+	g_object_set (terminal,
+	              "tab-expand", TRUE,
+	              "tab-fill", TRUE,
+	              NULL);
 
 	gtk_action_set_visible (giggle_view_get_action (GIGGLE_VIEW (view)), TRUE);
 }
