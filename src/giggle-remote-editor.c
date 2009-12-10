@@ -193,7 +193,7 @@ giggle_remote_editor_init (GiggleRemoteEditor *remote_editor)
 		g_error_free (error);
 	}
 
-	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (remote_editor)->vbox),
+	gtk_box_pack_start (GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (remote_editor))),
 	                    GTK_WIDGET (gtk_builder_get_object (builder, "remote_vbox")),
 	                    TRUE, TRUE, 0);
 

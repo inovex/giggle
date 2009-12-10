@@ -132,17 +132,20 @@ revision_view_attach_info (GtkWidget  *table,
 			   GtkWidget  *info,
 			   int         row)
 {
-	int              xpad = 6, ypad = 3;
-	double           yalign = 0.5;
-	GtkAttachOptions yattach = GTK_FILL;
-	int              end = 2;
+	GtkStyle         *style;
+	int               xpad = 6, ypad = 3;
+	double            yalign = 0.5;
+	GtkAttachOptions  yattach = GTK_FILL;
+	int               end = 2;
+
+	style = gtk_widget_get_style (info);
 
 	if (GTK_IS_BUTTON (info))
 		xpad = ypad = 0;
 
 	if (GTK_IS_SCROLLED_WINDOW (info)) {
-		xpad = MAX (0, xpad - info->style->xthickness);
-		ypad = MAX (0, ypad - info->style->ythickness);
+		xpad = MAX (0, xpad - style->xthickness);
+		ypad = MAX (0, ypad - style->ythickness);
 		yattach |= GTK_EXPAND;
 		yalign = 0.0;
 		end = 3;

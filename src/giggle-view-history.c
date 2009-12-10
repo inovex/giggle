@@ -181,17 +181,20 @@ view_history_set_busy (GtkWidget *widget,
 		       gboolean   busy)
 {
 	GdkCursor *cursor;
+	GdkWindow *window;
 
 	if (!GTK_WIDGET_REALIZED (widget)) {
 		return;
 	}
 
+	window = gtk_widget_get_window (widget);
+
 	if (busy) {
 		cursor = gdk_cursor_new (GDK_WATCH);
-		gdk_window_set_cursor (widget->window, cursor);
+		gdk_window_set_cursor (window, cursor);
 		gdk_cursor_unref (cursor);
 	} else {
-		gdk_window_set_cursor (widget->window, NULL);
+		gdk_window_set_cursor (window, NULL);
 	}
 }
 
@@ -506,6 +509,8 @@ view_history_revision_list_key_press_cb (GiggleRevListView *list,
 	GtkTreeSelection      *selection;
 	GtkAdjustment         *adj;
 	gdouble                value;
+	gdouble                adj_value;
+	gdouble                page_size;
 
 	if (event->keyval != GDK_space && event->keyval != GDK_BackSpace)
 		return FALSE;
@@ -513,12 +518,15 @@ view_history_revision_list_key_press_cb (GiggleRevListView *list,
 	giggle_view_shell_set_view_name (GIGGLE_VIEW_SHELL (priv->revision_shell), "DiffView");
 	adj = gtk_scrolled_window_get_vadjustment (GTK_SCROLLED_WINDOW (priv->revision_list_sw));
 
-	value = event->keyval == GDK_space ?
-		adj->value + (adj->page_size * 0.8) :
-		adj->value - (adj->page_size * 0.8);
+	adj_value = gtk_adjustment_get_value (adj);
+	page_size = gtk_adjustment_get_page_size (adj);
 
-	value = CLAMP (value, adj->lower, adj->upper - adj->page_size);
-	g_object_set (adj, "value", value, NULL);
+	value = event->keyval == GDK_space ?
+		adj_value + (page_size * 0.8) :
+		adj_value - (page_size * 0.8);
+
+	value = CLAMP (value, gtk_adjustment_get_lower (adj), gtk_adjustment_get_upper (adj) - page_size);
+	gtk_adjustment_set_value (adj, value);
 
 	if (gtk_tree_view_get_visible_range (GTK_TREE_VIEW (priv->revision_list), &start, &end)) {
 		selection = gtk_tree_view_get_selection (GTK_TREE_VIEW (priv->revision_list));

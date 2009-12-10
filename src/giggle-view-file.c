@@ -166,11 +166,11 @@ view_file_set_focus_cb (GtkWindow      *window,
 
 	action = gtk_action_group_get_action (priv->action_group, "ViewFileShowChangeSet");
 
-	gtk_action_set_sensitive (action, GTK_WIDGET_HAS_FOCUS (priv->source_view) |
-					  GTK_WIDGET_HAS_FOCUS (priv->revision_list));
+	gtk_action_set_sensitive (action, gtk_widget_has_focus (priv->source_view) |
+					  gtk_widget_has_focus (priv->revision_list));
 
 	action = gtk_action_group_get_action (priv->action_group, "ViewFileSelectRevision");
-	gtk_action_set_sensitive (action, GTK_WIDGET_HAS_FOCUS (priv->source_view));
+	gtk_action_set_sensitive (action, gtk_widget_has_focus (priv->source_view));
 }
 
 static void
@@ -212,7 +212,7 @@ view_file_goto_line_cb (GtkAction      *action,
 
 	g_object_set
 		(priv->goto_toolbar, "visible",
-		 !GTK_WIDGET_VISIBLE (priv->goto_toolbar), NULL);
+		 !gtk_widget_get_visible (priv->goto_toolbar), NULL);
 
 	gtk_widget_grab_focus (priv->goto_entry);
 }
@@ -274,9 +274,9 @@ view_file_show_changeset_cb (GtkAction      *action,
 	GiggleViewFilePriv *priv = GET_PRIV (view);
 	GiggleRevision     *revision = NULL;
 
-	if (GTK_WIDGET_HAS_FOCUS (priv->revision_list)) {
+	if (gtk_widget_has_focus (priv->revision_list)) {
 		revision = priv->current_revision;
-	} else if (GTK_WIDGET_HAS_FOCUS (priv->source_view)) {
+	} else if (gtk_widget_has_focus (priv->source_view)) {
 		revision = source_view_get_revision_at_insert (GTK_TEXT_VIEW (priv->source_view));
 	}
 
@@ -295,7 +295,7 @@ view_file_select_revision_cb (GtkAction      *action,
 	GiggleRevision     *revision = NULL;
 	GList              *selection;
 
-	if (GTK_WIDGET_HAS_FOCUS (priv->source_view))
+	if (gtk_widget_has_focus (priv->source_view))
 		revision = source_view_get_revision_at_insert (GTK_TEXT_VIEW (priv->source_view));
 
 	if (revision) {
@@ -538,7 +538,7 @@ create_category_icon (GiggleViewFilePriv *priv,
 	image = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, width, height);
 
 	canvas = cairo_create (image);
-	color = &priv->source_view->style->base[GTK_STATE_SELECTED];
+	color = &gtk_widget_get_style (priv->source_view)->base[GTK_STATE_SELECTED];
 	pixbuf = create_pixbuf_from_image (image);
 
 	cairo_surface_destroy (image);
@@ -609,7 +609,7 @@ source_view_expose_event_cb (GtkTextView    *text_view,
 		return FALSE;
 
 	buffer = GTK_SOURCE_BUFFER (gtk_text_view_get_buffer (text_view));
-	color = &priv->source_view->style->base[GTK_STATE_SELECTED];
+	color = &gtk_widget_get_style (priv->source_view)->base[GTK_STATE_SELECTED];
 
 	cr = gdk_cairo_create (event->window);
 	gdk_cairo_region (cr, event->region);
@@ -1194,10 +1194,13 @@ source_view_query_tooltip_cb (GtkWidget  *widget,
 	revision = source_view_get_revision_at_iter (&iter);
 
 	if (revision) {
-		const char   *committer_name = NULL;
-		const char   *author_name = NULL;
-		GiggleAuthor *committer = NULL;
-		GiggleAuthor *author = NULL;
+		const char    *committer_name = NULL;
+		const char    *author_name = NULL;
+		GtkAllocation  allocation;
+		GiggleAuthor  *committer = NULL;
+		GiggleAuthor  *author = NULL;
+
+		gtk_widget_get_allocation (widget, &allocation);
 
 		if (giggle_revision_get_date (revision)) {
 			strftime (date, sizeof date, "%c",
@@ -1229,7 +1232,7 @@ source_view_query_tooltip_cb (GtkWidget  *widget,
 						       0, bounds.y, NULL, &bounds.y);
 
 		bounds.x = 0;
-		bounds.width = widget->allocation.width;
+		bounds.width = allocation.width;
 
 		gtk_tooltip_set_tip_area (tooltip, &bounds);
 		gtk_tooltip_set_markup (tooltip, markup);

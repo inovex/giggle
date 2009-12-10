@@ -1280,7 +1280,7 @@ file_list_cell_data_background_func (GtkCellLayout   *cell_layout,
 
 	file_list = GIGGLE_FILE_LIST (data);
 	priv = GET_PRIV (file_list);
-	color = GTK_WIDGET (file_list)->style->bg[GTK_STATE_NORMAL];
+	color = gtk_widget_get_style (GTK_WIDGET (file_list))->bg[GTK_STATE_NORMAL];
 
 	gtk_tree_model_get (tree_model, iter,
 			    COL_REL_PATH, &rel_path,
@@ -1337,7 +1337,7 @@ file_list_cell_data_sensitive_func (GtkCellLayout   *layout,
 
 	if (GTK_IS_CELL_RENDERER_TEXT (renderer)) {
 		state = (value) ? GTK_STATE_NORMAL : GTK_STATE_INSENSITIVE;
-		color = GTK_WIDGET (list)->style->text [state];
+		color = gtk_widget_get_style (GTK_WIDGET (list))->text [state];
 		g_object_set (renderer, "foreground-gdk", &color, NULL);
 	} else {
 		g_object_set (renderer, "sensitive", value, NULL);

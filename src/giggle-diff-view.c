@@ -295,7 +295,7 @@ diff_view_style_set (GtkWidget *widget,
 		error_color = gdk_color_copy (&red);
 
 	g_object_set (priv->invalid_char,
-		      "foreground-gdk", &widget->style->base[GTK_STATE_NORMAL],
+		      "foreground-gdk", &gtk_widget_get_style (widget)->base[GTK_STATE_NORMAL],
 		      "background-gdk", error_color, "style", PANGO_STYLE_ITALIC, NULL);
 
 	gdk_color_free (error_color);

@@ -315,7 +315,7 @@ window_save_state (GiggleWindow *window)
 	g_snprintf (geometry, sizeof (geometry), "%dx%d+%d+%d",
 		    priv->width, priv->height, priv->x, priv->y);
 
-	maximized = gdk_window_get_state (GTK_WIDGET (window)->window) & GDK_WINDOW_STATE_MAXIMIZED;
+	maximized = gdk_window_get_state (gtk_widget_get_window (GTK_WIDGET (window))) & GDK_WINDOW_STATE_MAXIMIZED;
 
 	giggle_git_config_set_field (priv->configuration,
 				     GIGGLE_GIT_CONFIG_FIELD_MAIN_WINDOW_GEOMETRY,
@@ -336,7 +336,7 @@ window_configure_event (GtkWidget         *widget,
 {
 	GiggleWindowPriv *priv = GET_PRIV (widget);
 
-	if (!(gdk_window_get_state (widget->window) & GDK_WINDOW_STATE_MAXIMIZED)) {
+	if (!(gdk_window_get_state (gtk_widget_get_window (widget)) & GDK_WINDOW_STATE_MAXIMIZED)) {
 		gtk_window_get_size (GTK_WINDOW (widget), &priv->width, &priv->height);
 		gtk_window_get_position (GTK_WINDOW (widget), &priv->x, &priv->y);
 	}
@@ -604,7 +604,7 @@ window_bind_state (GiggleWindow *window)
 
 	priv = GET_PRIV (window);
 
-	if (!GTK_WIDGET_VISIBLE (window)) {
+	if (!gtk_widget_get_visible (GTK_WIDGET (window))) {
 		geometry = giggle_git_config_get_field (priv->configuration,
 							GIGGLE_GIT_CONFIG_FIELD_MAIN_WINDOW_GEOMETRY);
 		maximized = giggle_git_config_get_boolean_field (priv->configuration,
@@ -713,7 +713,7 @@ window_action_properties_cb (GtkAction    *action,
 		summary_view = giggle_view_summary_new ();
 
 		gtk_box_pack_start
-			(GTK_BOX (GTK_DIALOG (priv->summary_dialog)->vbox),
+			(GTK_BOX (gtk_dialog_get_content_area (GTK_DIALOG (priv->summary_dialog))),
 			 summary_view, TRUE, TRUE, 0);
 
 		gtk_window_set_default_size
@@ -1227,7 +1227,7 @@ window_recent_connect_proxy_cb (GtkActionGroup *action_group,
 	if (!GTK_IS_MENU_ITEM (proxy))
 		return;
 
-	label = GTK_LABEL (GTK_BIN (proxy)->child);
+	label = GTK_LABEL (gtk_bin_get_child (GTK_BIN (proxy)));
 
 	gtk_label_set_ellipsize (label, PANGO_ELLIPSIZE_MIDDLE);
 	gtk_label_set_max_width_chars (label, RECENT_ITEM_MAX_N_CHARS);
@@ -1421,7 +1421,7 @@ window_update_search_ui (GiggleWindow *window)
 	GtkActionGroup   *action_group;
 	GiggleView       *view;
 
-	if (GTK_WIDGET_VISIBLE (priv->view_shell)) {
+	if (gtk_widget_get_visible (priv->view_shell)) {
 		view = giggle_view_shell_get_selected (GIGGLE_VIEW_SHELL (priv->view_shell));
 		searchable = GIGGLE_IS_SEARCHABLE (view);
 	}

@@ -589,7 +589,7 @@ rev_list_view_style_set (GtkWidget *widget,
 
 	gtk_tree_view_column_set_min_width (priv->emblem_column,
 					    priv->emblem_size * 3 +
-					    2 * widget->style->xthickness);
+					    2 * gtk_widget_get_style (widget)->xthickness);
 
 	GTK_WIDGET_CLASS (giggle_rev_list_view_parent_class)->style_set (widget, prev_style);
 }
@@ -1681,7 +1681,7 @@ giggle_rev_list_view_init (GiggleRevListView *rev_list_view)
 	GtkCellRenderer       *cell;
 
 	priv = GET_PRIV (rev_list_view);
-	font_size = pango_font_description_get_size (GTK_WIDGET (rev_list_view)->style->font_desc);
+	font_size = pango_font_description_get_size (gtk_widget_get_style (GTK_WIDGET (rev_list_view))->font_desc);
 	font_size = PANGO_PIXELS (font_size);
 
 	/* yes, it's a hack */
