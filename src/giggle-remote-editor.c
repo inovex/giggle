@@ -20,16 +20,11 @@
 
 #include <config.h>
 
-#include "giggle-remote-editor.h"
-
 #include <glib/gi18n.h>
-#include <gtk/gtkbox.h>
-#include <gtk/gtkcellrenderertext.h>
-#include <gtk/gtkentry.h>
-#include <gtk/gtkstock.h>
-#include <gtk/gtktreeview.h>
+#include <gtk/gtk.h>
 #include <glade/glade.h>
 
+#include "giggle-remote-editor.h"
 #include "giggle-helpers.h"
 
 typedef struct GiggleRemoteEditorPriv GiggleRemoteEditorPriv;

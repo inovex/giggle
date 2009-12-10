@@ -19,12 +19,12 @@
  */
 
 #include "config.h"
-#include "giggle-helpers.h"
-
-#include "libgiggle-git/giggle-git.h"
 
 #include <gdk/gdkkeysyms.h>
-#include <gtk/gtktreeselection.h>
+#include <gtk/gtk.h>
+
+#include "giggle-helpers.h"
+#include "libgiggle-git/giggle-git.h"
 
 static void
 remote_editor_tree_selection_get_branches (GtkTreeModel *model,

@@ -20,14 +20,10 @@
 
 #include <config.h>
 
-#include "giggle-short-list.h"
-
 #include <glib/gi18n.h>
-#include <gtk/gtkbutton.h>
-#include <gtk/gtkdialog.h>
-#include <gtk/gtklabel.h>
-#include <gtk/gtkscrolledwindow.h>
-#include <gtk/gtkstock.h>
+#include <gtk/gtk.h>
+
+#include "giggle-short-list.h"
 #include "libgiggle/giggle-marshal.h"
 
 typedef struct GiggleShortListPriv GiggleShortListPriv;
