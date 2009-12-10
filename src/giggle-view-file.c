@@ -560,7 +560,7 @@ create_category (GiggleViewFilePriv *priv,
 		pixbuf = create_category_icon (priv, name);
 	
 	if (pixbuf) {
-		gtk_source_view_set_mark_category_pixbuf
+		gtk_source_view_set_mark_category_icon_from_pixbuf
 			(GTK_SOURCE_VIEW (priv->source_view),
 			 name, pixbuf);
 
