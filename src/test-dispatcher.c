@@ -57,7 +57,7 @@ main (int argc, char **argv)
 					NULL);
 #endif
 
-	g_timeout_add (10000, timeout_cancel, GINT_TO_POINTER (id));
+	g_timeout_add_seconds (10, timeout_cancel, GINT_TO_POINTER (id));
 
 	g_print ("Waiting for the result\n");
 
