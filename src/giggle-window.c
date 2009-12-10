@@ -712,9 +712,9 @@ window_action_properties_cb (GtkAction    *action,
 
 		summary_view = giggle_view_summary_new ();
 
-		gtk_box_pack_start_defaults
+		gtk_box_pack_start
 			(GTK_BOX (GTK_DIALOG (priv->summary_dialog)->vbox),
-			 summary_view);
+			 summary_view, TRUE, TRUE, 0);
 
 		gtk_window_set_default_size
 			(GTK_WINDOW (priv->summary_dialog), 460, 400);
@@ -1616,8 +1616,8 @@ giggle_window_init (GiggleWindow *window)
 	giggle_view_shell_append_view (GIGGLE_VIEW_SHELL (priv->view_shell),
 				       GIGGLE_VIEW (priv->history_view));
 
-	gtk_box_pack_start_defaults (GTK_BOX (priv->content_vbox),
-				     priv->view_shell);
+	gtk_box_pack_start (GTK_BOX (priv->content_vbox),
+	                    priv->view_shell, TRUE, TRUE, 0);
 
 	gtk_container_add (GTK_CONTAINER (window), priv->content_vbox);
 	gtk_widget_show_all (priv->content_vbox);

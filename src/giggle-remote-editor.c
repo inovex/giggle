@@ -189,8 +189,9 @@ giggle_remote_editor_init (GiggleRemoteEditor *remote_editor)
 
 	xml = glade_xml_new (GLADEDIR "/main-window.glade", "remote_vbox", NULL);
 
-	gtk_box_pack_start_defaults (GTK_BOX (GTK_DIALOG (remote_editor)->vbox),
-				     glade_xml_get_widget (xml, "remote_vbox"));
+	gtk_box_pack_start (GTK_BOX (GTK_DIALOG (remote_editor)->vbox),
+	                    glade_xml_get_widget (xml, "remote_vbox"),
+	                    TRUE, TRUE, 0);
 
 	priv->entry_name = glade_xml_get_widget (xml, "entry_remote_name");;
 	priv->entry_url = glade_xml_get_widget (xml, "entry_remote_url");;

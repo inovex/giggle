@@ -588,7 +588,7 @@ view_history_setup_revision_pane (GObject *object)
 
 	vbox = gtk_vbox_new (FALSE, 0);
 	gtk_box_pack_start (GTK_BOX (vbox), toolbar, FALSE, TRUE, 0);
-	gtk_box_pack_start_defaults (GTK_BOX (vbox), priv->revision_shell);
+	gtk_box_pack_start (GTK_BOX (vbox), priv->revision_shell, TRUE, TRUE, 0);
 	gtk_paned_pack2 (GTK_PANED (priv->main_vpaned), vbox, FALSE, FALSE);
 	gtk_widget_show_all (vbox);
 
