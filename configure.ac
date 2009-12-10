@@ -41,7 +41,6 @@ PKG_CHECK_MODULES(GIGGLE, [
         gthread-2.0       >= 2.16
         gtk+-2.0          >= 2.16
         gtksourceview-2.0 >= 2.8
-        libglade-2.0      >  2.4
 ])
 
 dnl  -----------------------

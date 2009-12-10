@@ -1,5 +1,5 @@
 data/giggle.desktop.in
-data/main-window.glade
+[type: gettext/glade]data/main-window.ui
 libgiggle/giggle-plugin.c
 plugins/giggle-personal-details-window.c
 plugins/giggle-view-terminal.c
