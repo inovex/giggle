@@ -1,40 +1,36 @@
 dnl Process this file with autoconf to produce a configure script.
 AC_PREREQ(2.61)
+AC_INIT([Giggle],[0.4.91],
+        [http://bugzilla.gnome.org/enter_bug.cgi?product=giggle],
+        [giggle])
 
-AC_INIT([giggle],[0.4.91],
-        [http://bugzilla.gnome.org/enter_bug.cgi?product=giggle])
-
-AC_SUBST([LIBGIGGLE_ABI],     [0:0:0])
-AC_SUBST([LIBGIGGLE_GIT_ABI], [0:0:0])
-
-AC_CONFIG_SRCDIR([src/giggle-main.c])
+AC_CONFIG_HEADERS([config.h])
+AC_CONFIG_SRCDIR([configure.ac])
 AC_CONFIG_MACRO_DIR([m4])
 
-AM_INIT_AUTOMAKE([-Wall -Werror])
+AM_INIT_AUTOMAKE([1.10 check-news no-define -Wall -Werror])
 # Support silent build rules, requires at least automake-1.11. Disable
 # by either passing --disable-silent-rules to configure or passing V=1
 # to make
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
-AC_CONFIG_HEADERS([config.h])
-
-AC_DISABLE_STATIC
-
-CXX=no
-F77=no
-
-LT_PREREQ([2.2])
-LT_INIT
-
-AC_ISC_POSIX
-
 AC_PROG_CC
-AC_HEADER_STDC
+AM_PROG_CC_C_O
+AC_PROG_CXX
 
-AM_PATH_GLIB_2_0
+LT_PREREQ([2.2.0])
+LT_INIT([disable-static win32-dll])
 
-dnl Defined in acinclude.m4
-IMENDIO_COMPILE_WARNINGS
+GNOME_COMMON_INIT
+GNOME_MAINTAINER_MODE_DEFINES
+GNOME_COMPILE_WARNINGS([maximum])
+GNOME_CXX_WARNINGS
+
+AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
+
+AC_SUBST([LIBGIGGLE_ABI],     [0:0:0])
+AC_SUBST([LIBGIGGLE_GIT_ABI], [0:0:0])
+
 
 dnl  ------------------
 dnl | Pkgconfig checks |---------------------------------------
@@ -115,13 +111,12 @@ AC_RUN_IFELSE(
 dnl  ------------------
 dnl | Language Support |---------------------------------------
 dnl  ------------------
-GETTEXT_PACKAGE=giggle
-AC_SUBST(GETTEXT_PACKAGE)
-AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE,"$GETTEXT_PACKAGE",[Gettext package name])
-AM_GLIB_DEFINE_LOCALEDIR(LOCALEDIR)
-
-AM_GLIB_GNU_GETTEXT
 IT_PROG_INTLTOOL([0.35.0])
+AC_SUBST([GETTEXT_PACKAGE], [giggle])
+AM_GNU_GETTEXT_VERSION([0.11])
+AM_GLIB_GNU_GETTEXT
+AC_DEFINE([GETTEXT_PACKAGE], [PACKAGE_TARNAME],[Define to the gettext package name])
+AM_GLIB_DEFINE_LOCALEDIR(LOCALEDIR)
 
 AC_SUBST([CONFIG_STATUS_DEPENDENCIES],['$(top_srcdir)/po/LINGUAS'])
 
