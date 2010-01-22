@@ -710,7 +710,7 @@ view_file_find_language (GiggleViewFile *view,
 	manager = gtk_source_language_manager_get_default ();
 	ids = gtk_source_language_manager_get_language_ids (manager);
 
-	content_type = g_content_type_guess (priv->current_file, text, len, NULL);
+	content_type = g_content_type_guess (priv->current_file, (guchar *)text, len, NULL);
 	filename = g_path_get_basename (priv->current_file);
 
 	for (; *ids; ++ids) {
