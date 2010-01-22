@@ -72,14 +72,14 @@ libgiggle_git_la_LDFLAGS = \
 	$(NULL)
 
 giggle-git-enums.h: giggle-git-enums.h.in $(libgiggle_git_h_files)
-	( cd $(srcdir) && $(GLIB_MKENUMS) --template $^ ) > xgen-gtbh
-	( cmp -s xgen-gtbh $@ || (echo "  ENUM  $@..."; cp xgen-gtbh $@ ))
-	( rm -f xgen-gtbh )
+	$(AM_V_at)( cd $(srcdir) && $(GLIB_MKENUMS) --template $^ ) > xgen-gtbh
+	$(AM_V_at)( cmp -s xgen-gtbh $@ || (echo "  ENUM  $@..."; cp xgen-gtbh $@ ))
+	$(AM_V_at)( rm -f xgen-gtbh )
 
 giggle-git-enums.c: giggle-git-enums.c.in $(libgiggle_git_h_files)
-	( cd $(srcdir) && $(GLIB_MKENUMS) --template $^ ) > xgen-gtbc
-	( cmp -s xgen-gtbc $@ || (echo "  ENUM  $@..."; cp xgen-gtbc $@ ))
-	( rm -f xgen-gtbc )
+	$(AM_V_at)( cd $(srcdir) && $(GLIB_MKENUMS) --template $^ ) > xgen-gtbc
+	$(AM_V_at)( cmp -s xgen-gtbc $@ || (echo "  ENUM  $@..."; cp xgen-gtbc $@ ))
+	$(AM_V_at)( rm -f xgen-gtbc )
 
 BUILT_SOURCES = \
 	giggle-git-enums.h \
