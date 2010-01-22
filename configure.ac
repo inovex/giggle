@@ -8,7 +8,7 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_SRCDIR([configure.ac])
 AC_CONFIG_MACRO_DIR([m4])
 
-AM_INIT_AUTOMAKE([1.10 check-news no-define -Wall -Werror])
+AM_INIT_AUTOMAKE([1.10 check-news -Wall -Werror])
 # Support silent build rules, requires at least automake-1.11. Disable
 # by either passing --disable-silent-rules to configure or passing V=1
 # to make
@@ -27,6 +27,7 @@ GNOME_COMPILE_WARNINGS([maximum])
 GNOME_CXX_WARNINGS
 
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
+AC_PATH_PROG(GLIB_MKENUMS, glib-mkenums)
 
 AC_SUBST([LIBGIGGLE_ABI],     [0:0:0])
 AC_SUBST([LIBGIGGLE_GIT_ABI], [0:0:0])
