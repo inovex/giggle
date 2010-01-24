@@ -18,7 +18,7 @@ AC_PROG_CC
 AM_PROG_CC_C_O
 AC_PROG_CXX
 
-LT_PREREQ([2.2.0])
+LT_PREREQ([2.2.6])
 LT_INIT([disable-static win32-dll])
 
 GNOME_COMMON_INIT
