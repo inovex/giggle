@@ -1,8 +1,10 @@
 dnl Process this file with autoconf to produce a configure script.
-AC_PREREQ(2.61)
-AC_INIT([Giggle],[0.4.91],
+AC_PREREQ(2.63.2)
+AC_INIT([Giggle],
+        [0.4.91],
         [http://bugzilla.gnome.org/enter_bug.cgi?product=giggle],
-        [giggle])
+        [giggle],
+        [http://live.gnome.org/giggle])
 
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_SRCDIR([configure.ac])
@@ -14,10 +16,12 @@ AM_INIT_AUTOMAKE([1.10 check-news -Wall -Werror])
 # to make
 m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
+# Check for programs
 AC_PROG_CC
 AM_PROG_CC_C_O
 AC_PROG_CXX
 
+# Initialize libtool
 LT_PREREQ([2.2.6])
 LT_INIT([disable-static win32-dll])
 
@@ -112,9 +116,9 @@ AC_RUN_IFELSE(
 dnl  ------------------
 dnl | Language Support |---------------------------------------
 dnl  ------------------
-IT_PROG_INTLTOOL([0.35.0])
+IT_PROG_INTLTOOL([0.40.0])
 AC_SUBST([GETTEXT_PACKAGE], [giggle])
-AM_GNU_GETTEXT_VERSION([0.11])
+AM_GNU_GETTEXT_VERSION([0.17])
 AM_GLIB_GNU_GETTEXT
 AC_DEFINE([GETTEXT_PACKAGE], [PACKAGE_TARNAME],[Define to the gettext package name])
 AM_GLIB_DEFINE_LOCALEDIR(LOCALEDIR)

@@ -890,7 +890,7 @@ static void
 window_action_homepage_cb (GtkAction    *action,
 			   GiggleWindow *window)
 {
-	window_visit_uri (window, PACKAGE_WEBSITE);
+	window_visit_uri (window, PACKAGE_URL);
 }
 
 static void
@@ -919,7 +919,7 @@ window_action_about_cb (GtkAction    *action,
 			       "Copyright \xc2\xa9 2008 Mathias Hasselmann",
 			       "translator-credits", _("translator-credits"),
 			       "comments", _("A graphical frontend to the git content tracker."),
-			       "website", PACKAGE_WEBSITE,
+			       "website", PACKAGE_URL,
 			       "logo-icon-name", PACKAGE,
 			       "version", VERSION,
 			       "authors", authors,
