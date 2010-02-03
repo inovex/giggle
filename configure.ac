@@ -25,10 +25,9 @@ AC_PROG_CXX
 LT_PREREQ([2.2.6])
 LT_INIT([disable-static win32-dll])
 
-GNOME_COMMON_INIT
 GNOME_MAINTAINER_MODE_DEFINES
 GNOME_COMPILE_WARNINGS([maximum])
-GNOME_CXX_WARNINGS
+GNOME_CXX_WARNINGS([yes])
 
 AC_PATH_PROG(GLIB_GENMARSHAL, glib-genmarshal)
 AC_PATH_PROG(GLIB_MKENUMS, glib-mkenums)
@@ -165,10 +164,6 @@ fi
 
 dnl -----------------------------------------------------------
 
-dnl This will cause the automake generated makefiles to pass the
-dnl correct flags to aclocal.
-ACLOCAL_AMFLAGS="\${ACLOCAL_FLAGS}"
-AC_SUBST(ACLOCAL_AMFLAGS)
 
 AC_CONFIG_FILES([
         Makefile
