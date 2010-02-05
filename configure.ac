@@ -18,12 +18,22 @@ m4_ifdef([AM_SILENT_RULES], [AM_SILENT_RULES([yes])])
 
 # Check for programs
 AC_PROG_CC
-AM_PROG_CC_C_O
+AC_PROG_CC_C_O
 AC_PROG_CXX
 
 # Initialize libtool
 LT_PREREQ([2.2.6])
 LT_INIT([disable-static win32-dll])
+
+# Checks for header files.
+AC_CHECK_HEADERS([fcntl.h locale.h stdlib.h string.h unistd.h])
+
+# Checks for typedefs, structures, and compiler characteristics.
+AC_C_INLINE
+
+# Checks for library functions.
+AC_FUNC_MKTIME
+AC_CHECK_FUNCS([localtime_r setlocale strchr strrchr strstr])
 
 GNOME_MAINTAINER_MODE_DEFINES
 GNOME_COMPILE_WARNINGS([maximum])
@@ -168,12 +178,12 @@ dnl -----------------------------------------------------------
 AC_CONFIG_FILES([
         Makefile
         data/Makefile
-        libgiggle/Makefile
         libgiggle-git/Makefile
-        plugins/Makefile
-        src/Makefile
+        libgiggle/Makefile
         pixmaps/Makefile
+        plugins/Makefile
         po/Makefile.in
+        src/Makefile
         test/Makefile
 ])
 

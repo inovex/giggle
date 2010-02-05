@@ -13,8 +13,9 @@ PKG_NAME="giggle"
 }
 
 which gnome-autogen.sh || {
-        echo "You need to install gnome-common"
-        exit 1
+    echo "You need to install gnome-common module and make"
+    echo "sure the gnome-autogen.sh script is in your \$PATH."
+    exit 1
 }
 
 USE_GNOME2_MACROS=1 . gnome-autogen.sh
