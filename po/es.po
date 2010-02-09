@@ -81,7 +81,7 @@ msgstr "_Terminal"
 
 #: ../plugins/giggle-view-terminal.c:110
 msgid "Issue git commands via terminal"
-msgstr ""
+msgstr "Ejecutar comando Git a través del terminal"
 
 #: ../plugins/personal-details.xml.h:1
 msgid "Edit personal details"
@@ -471,7 +471,7 @@ msgstr "Mostrar _todos..."
 #: ../src/giggle-view-diff.c:108
 #, c-format
 msgid "Change %d of %d"
-msgstr "Cambiar %d de %d"
+msgstr "Cambio %d de %d"
 
 #: ../src/giggle-view-diff.c:185
 msgid "_Previous Change"
