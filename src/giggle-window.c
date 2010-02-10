@@ -897,7 +897,7 @@ static void
 window_action_about_cb (GtkAction    *action,
 			GiggleWindow *window)
 {
-	gchar *license_translated, *copyright;
+	gchar *license_translated;
 
 	const char *artists[] = {
 		"Andreas Nilsson",
@@ -917,20 +917,20 @@ window_action_about_cb (GtkAction    *action,
 		NULL
 	};
 
-	copyright = g_strdup ("Copyright © 2007-2008 Imendio AB\n"
-	                      "Copyright © 2008-2010 Mathias Hasselmann");
+	const gchar *copyright = _("Copyright © 2007 - 2008 Imendio AB\n"
+	                           "Copyright © 2008 - 2010 Mathias Hasselmann");
 
 	const gchar *license[] = {
-		N_("The GNOME Web Browser is free software; you can redistribute it and/or modify "
+		N_("This program is free software; you can redistribute it and/or modify "
 		   "it under the terms of the GNU General Public License as published by "
 		   "the Free Software Foundation; either version 2 of the License, or "
 		   "(at your option) any later version."),
-		N_("The GNOME Web Browser is distributed in the hope that it will be useful, "
+		N_("This program is distributed in the hope that it will be useful, "
 		   "but WITHOUT ANY WARRANTY; without even the implied warranty of "
 		   "MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the "
 		   "GNU General Public License for more details."),
 		N_("You should have received a copy of the GNU General Public License "
-		   "along with the GNOME Web Browser; if not, write to the Free Software Foundation, Inc., "
+		   "along with this program; if not, write to the Free Software Foundation, Inc., "
 		   "51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA")
 	};
 	license_translated = g_strjoin ("\n\n",
@@ -965,7 +965,6 @@ window_action_about_cb (GtkAction    *action,
 	                       "wrap-license", TRUE,
 			       NULL);
 
-	g_free (copyright);
 	g_free (license_translated);
 }
 
