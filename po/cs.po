@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: giggle master\n"
 "Report-Msgid-Bugs-To: http://bugzilla.gnome.org/enter_bug.cgi?"
 "product=giggle\n"
-"POT-Creation-Date: 2010-02-20 08:39+0000\n"
-"PO-Revision-Date: 2010-02-21 13:18+0100\n"
+"POT-Creation-Date: 2010-02-22 13:50+0000\n"
+"PO-Revision-Date: 2010-02-22 15:22+0100\n"
 "Last-Translator: Marek Černocký <marek@manet.cz>\n"
 "Language-Team: Czech <gnome-cs-list@gnome.org>\n"
 "MIME-Version: 1.0\n"
@@ -603,6 +603,8 @@ msgid ""
 "Copyright © 2007 - 2008 Imendio AB\n"
 "Copyright © 2008 - 2010 Mathias Hasselmann"
 msgstr ""
+"Copyright © 2007 - 2008 Imendio AB\n"
+"Copyright © 2008 - 2010 Mathias Hasselmann"
 
 #: ../src/giggle-window.c:924
 msgid ""
@@ -611,6 +613,10 @@ msgid ""
 "Software Foundation; either version 2 of the License, or (at your option) "
 "any later version."
 msgstr ""
+"Tento program je svobodný software; můžete jej šířit a modifikovat podle "
+"ustanovení GNU General Public License, vydávané Free Software Foundation; a "
+"to buď verze 2 této licence anebo (podle vlastního uvážení) kterékoliv "
+"pozdější verze."
 
 #: ../src/giggle-window.c:928
 msgid ""
@@ -619,6 +625,9 @@ msgid ""
 "FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for "
 "more details."
 msgstr ""
+"Tento program je rozšiřován v naději, že bude užitečný, avšak BEZ JAKÉKOLIV "
+"ZÁRUKY; neposkytují se ani odvozené záruky PRODEJNOSTI anebo VHODNOSTI PRO "
+"URČITÝ ÚČEL. Další podrobnosti hledejte v GNU General Public License."
 
 #: ../src/giggle-window.c:932
 msgid ""
@@ -626,6 +635,9 @@ msgid ""
 "this program; if not, write to the Free Software Foundation, Inc., 51 "
 "Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA"
 msgstr ""
+"Kopii GNU General Public License jste měl(a) obdržet spolu s tímto "
+"programem; pokud se tak nestalo, napište o ni Free Software Foundation, "
+"Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA"
 
 #. Translators: This is a special message that shouldn't be translated
 #. * literally. It is used in the about box to give credits to
@@ -640,16 +652,12 @@ msgid "translator-credits"
 msgstr "Marek Černocký <marek@manet.cz>"
 
 #: ../src/giggle-window.c:955
-#, fuzzy
-#| msgid "A graphical frontend to the git content tracker."
 msgid "A graphical frontend for Git"
-msgstr "Grafické rozhraní ke správci obsahu git."
+msgstr "Grafické rozhraní ke správci obsahu git"
 
 #: ../src/giggle-window.c:964
-#, fuzzy
-#| msgid "Giggle"
 msgid "Giggle Website"
-msgstr "Giggle"
+msgstr "Webové stránky Giggle"
 
 #: ../src/giggle-window.c:1018
 msgid "_Find..."
