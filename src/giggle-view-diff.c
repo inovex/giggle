@@ -162,7 +162,7 @@ static void
 view_diff_add_ui (GiggleView   *view,
 		  GtkUIManager *manager)
 {
-	const static char layout[] =
+	static const char layout[] =
 		"<ui>"
 		"  <menubar name='MainMenubar'>"
 		"    <menu action='GoMenu'>"
