@@ -266,6 +266,8 @@ view_diff_path_selected (GtkTreeSelection *selection,
 
 	if (path)
 		giggle_diff_view_scroll_to_file (GIGGLE_DIFF_VIEW (priv->diff_view), path);
+
+	g_free (path);
 }
 
 static void
