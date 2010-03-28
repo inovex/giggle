@@ -1585,9 +1585,11 @@ window_plugin_added_cb (GigglePluginManager *manager,
 	GiggleWindowPriv *priv = GET_PRIV (window);
 	GError           *error = NULL;
 
+	/*
 	g_print ("%s: %s - %s\n", G_STRFUNC,
 		 giggle_plugin_get_filename (plugin),
 		 giggle_plugin_get_description (plugin));
+	*/
 
 	if (!giggle_plugin_merge_ui (plugin, priv->ui_manager, &error)) {
 		g_warning ("%s: %s", G_STRFUNC, error->message);
