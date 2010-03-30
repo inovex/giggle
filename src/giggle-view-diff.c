@@ -258,7 +258,7 @@ view_diff_path_selected (GtkTreeSelection *selection,
 			 GiggleViewDiff   *view)
 {
 	GiggleViewDiffPriv *priv;
-	const char         *path;
+	gchar              *path;
 
 	priv = GET_PRIV (view);
 
