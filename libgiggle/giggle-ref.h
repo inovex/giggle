@@ -34,9 +34,12 @@ G_BEGIN_DECLS
 
 typedef struct _GiggleRef      GiggleRef;
 typedef struct _GiggleRefClass GiggleRefClass;
+typedef struct _GiggleRefPriv  GiggleRefPriv;
 
 struct _GiggleRef {
 	GObject parent_instance;
+
+	GiggleRefPriv *priv;
 };
 
 struct _GiggleRefClass {
