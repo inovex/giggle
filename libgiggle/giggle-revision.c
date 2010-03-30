@@ -23,8 +23,6 @@
 
 #include <time.h>
 
-#define GET_PRIV(obj) (G_TYPE_INSTANCE_GET_PRIVATE ((obj), GIGGLE_TYPE_REVISION, GiggleRevisionPriv))
-
 enum {
 	PROP_0,
 	PROP_SHA,
@@ -34,7 +32,7 @@ enum {
 	PROP_SHORT_LOG
 };
 
-typedef struct {
+struct _GiggleRevisionPriv {
 	char               *sha;
 	struct tm          *date;
 	GiggleAuthor       *author;
@@ -49,13 +47,12 @@ typedef struct {
 
 	GList              *parents;
 	GList              *children;
-}  GiggleRevisionPriv;
+};
 
 G_DEFINE_TYPE (GiggleRevision, giggle_revision, G_TYPE_OBJECT)
 
-static void
-revision_add_descendent_branch (GiggleRevision *revision,
-				GiggleBranch   *branch);
+static void     revision_add_descendent_branch          (GiggleRevision *revision,
+                                                         GiggleBranch   *branch);
 
 static void
 revision_set_property (GObject      *object,
@@ -65,7 +62,7 @@ revision_set_property (GObject      *object,
 {
 	GiggleRevisionPriv *priv;
 
-	priv = GET_PRIV (object);
+	priv = GIGGLE_REVISION (object)->priv;
 
 	switch (param_id) {
 	case PROP_SHA:
@@ -111,7 +108,7 @@ revision_get_property (GObject    *object,
 {
 	GiggleRevisionPriv *priv;
 
-	priv = GET_PRIV (object);
+	priv = GIGGLE_REVISION (object)->priv;
 
 	switch (param_id) {
 	case PROP_SHA:
@@ -143,11 +140,9 @@ revision_get_property (GObject    *object,
 static void
 revision_finalize (GObject *object)
 {
-	GiggleRevision     *revision;
 	GiggleRevisionPriv *priv;
 
-	revision = GIGGLE_REVISION (object);
-	priv = GET_PRIV (revision);
+	priv = GIGGLE_REVISION (object)->priv;
 
 	g_free (priv->sha);
 	g_free (priv->short_log);
@@ -231,6 +226,9 @@ giggle_revision_class_init (GiggleRevisionClass *class)
 static void
 giggle_revision_init (GiggleRevision *revision)
 {
+	revision->priv = G_TYPE_INSTANCE_GET_PRIVATE ((revision),
+	                                              GIGGLE_TYPE_REVISION,
+	                                              GiggleRevisionPriv);
 }
 
 GiggleRevision *
@@ -243,14 +241,16 @@ const gchar *
 giggle_revision_get_sha (GiggleRevision *revision)
 {
 	g_return_val_if_fail (GIGGLE_IS_REVISION (revision), NULL);
-	return GET_PRIV (revision)->sha;
+
+	return revision->priv->sha;
 }
 
 GiggleAuthor *
 giggle_revision_get_author (GiggleRevision *revision)
 {
 	g_return_val_if_fail (GIGGLE_IS_REVISION (revision), NULL);
-	return GET_PRIV (revision)->author;
+
+	return revision->priv->author;
 }
 
 void
@@ -266,7 +266,8 @@ GiggleAuthor *
 giggle_revision_get_committer (GiggleRevision *revision)
 {
 	g_return_val_if_fail (GIGGLE_IS_REVISION (revision), NULL);
-	return GET_PRIV (revision)->committer;
+
+	return revision->priv->committer;
 }
 
 void
@@ -282,7 +283,8 @@ const struct tm *
 giggle_revision_get_date (GiggleRevision *revision)
 {
 	g_return_val_if_fail (GIGGLE_IS_REVISION (revision), NULL);
-	return GET_PRIV (revision)->date;
+
+	return revision->priv->date;
 }
 
 void
@@ -298,7 +300,8 @@ const gchar *
 giggle_revision_get_short_log (GiggleRevision *revision)
 {
 	g_return_val_if_fail (GIGGLE_IS_REVISION (revision), NULL);
-	return GET_PRIV (revision)->short_log;
+
+	return revision->priv->short_log;
 }
 
 void
@@ -329,10 +332,7 @@ revision_add_descendent_branch (GiggleRevision *revision,
 {
 	GiggleRevisionPriv *priv;
 
-	g_return_if_fail (GIGGLE_IS_REVISION (revision));
-	g_return_if_fail (GIGGLE_IS_REF (branch));
-
-	priv = GET_PRIV (revision);
+	priv = revision->priv;
 
 	if (!g_list_find (priv->descendent_branches, branch)) {
 		priv->descendent_branches = g_list_prepend (priv->descendent_branches, branch);
@@ -350,7 +350,7 @@ giggle_revision_add_child (GiggleRevision *revision,
 	g_return_if_fail (GIGGLE_IS_REVISION (revision));
 	g_return_if_fail (GIGGLE_IS_REVISION (child));
 
-	priv = GET_PRIV (revision);
+	priv = revision->priv;
 
 	priv->children = g_list_prepend (priv->children, child);
 	branches = priv->descendent_branches;
@@ -371,7 +371,7 @@ giggle_revision_remove_child (GiggleRevision *revision,
 	g_return_if_fail (GIGGLE_IS_REVISION (revision));
 	g_return_if_fail (GIGGLE_IS_REVISION (child));
 
-	priv = GET_PRIV (revision);
+	priv = revision->priv;
 
 	/* the child could have been added several times? */
 	priv->children = g_list_remove_all (priv->children, child);
@@ -381,14 +381,16 @@ GList*
 giggle_revision_get_parents (GiggleRevision *revision)
 {
 	g_return_val_if_fail (GIGGLE_IS_REVISION (revision), NULL);
-	return GET_PRIV (revision)->parents;
+
+	return revision->priv->parents;
 }
 
 GList*
 giggle_revision_get_children (GiggleRevision *revision)
 {
 	g_return_val_if_fail (GIGGLE_IS_REVISION (revision), NULL);
-	return GET_PRIV (revision)->children;
+
+	return revision->priv->children;
 }
 
 void
@@ -400,7 +402,7 @@ giggle_revision_add_parent (GiggleRevision *revision,
 	g_return_if_fail (GIGGLE_IS_REVISION (revision));
 	g_return_if_fail (GIGGLE_IS_REVISION (parent));
 
-	priv = GET_PRIV (revision);
+	priv = revision->priv;
 
 	priv->parents = g_list_prepend (priv->parents, parent);
 	giggle_revision_add_child (parent, revision);
@@ -415,7 +417,7 @@ giggle_revision_remove_parent (GiggleRevision *revision,
 	g_return_if_fail (GIGGLE_IS_REVISION (revision));
 	g_return_if_fail (GIGGLE_IS_REVISION (parent));
 
-	priv = GET_PRIV (revision);
+	priv = revision->priv;
 
 	/* the parent could have been added several times? */
 	priv->parents = g_list_remove_all (priv->parents, parent);
@@ -426,7 +428,8 @@ GList*
 giggle_revision_get_branch_heads (GiggleRevision *revision)
 {
 	g_return_val_if_fail (GIGGLE_IS_REVISION (revision), NULL);
-	return GET_PRIV (revision)->branch_heads;
+
+	return revision->priv->branch_heads;
 }
 
 void
@@ -438,7 +441,7 @@ giggle_revision_add_branch_head (GiggleRevision *revision,
 	g_return_if_fail (GIGGLE_IS_REVISION (revision));
 	g_return_if_fail (GIGGLE_IS_REF (branch));
 
-	priv = GET_PRIV (revision);
+	priv = revision->priv;
 
 	priv->branch_heads = g_list_prepend (priv->branch_heads,
 					     g_object_ref (branch));
@@ -450,7 +453,8 @@ GList *
 giggle_revision_get_tags (GiggleRevision *revision)
 {
 	g_return_val_if_fail (GIGGLE_IS_REVISION (revision), NULL);
-	return GET_PRIV (revision)->tags;
+
+	return revision->priv->tags;
 }
 
 void
@@ -462,7 +466,7 @@ giggle_revision_add_tag (GiggleRevision *revision,
 	g_return_if_fail (GIGGLE_IS_REVISION (revision));
 	g_return_if_fail (GIGGLE_IS_REF (tag));
 
-	priv = GET_PRIV (revision);
+	priv = revision->priv;
 
 	priv->tags = g_list_prepend (priv->tags,
 				     g_object_ref (tag));
@@ -472,7 +476,8 @@ GList *
 giggle_revision_get_remotes (GiggleRevision *revision)
 {
 	g_return_val_if_fail (GIGGLE_IS_REVISION (revision), NULL);
-	return GET_PRIV (revision)->remotes;
+
+	return revision->priv->remotes;
 }
 
 void
@@ -484,7 +489,7 @@ giggle_revision_add_remote (GiggleRevision *revision,
 	g_return_if_fail (GIGGLE_IS_REVISION (revision));
 	g_return_if_fail (GIGGLE_IS_REF (remote));
 
-	priv = GET_PRIV (revision);
+	priv = revision->priv;
 
 	priv->remotes = g_list_prepend (priv->remotes,
 					g_object_ref (remote));
@@ -494,7 +499,8 @@ GList*
 giggle_revision_get_descendent_branches (GiggleRevision *revision)
 {
 	g_return_val_if_fail (GIGGLE_IS_REVISION (revision), NULL);
-	return GET_PRIV (revision)->descendent_branches;
+
+	return revision->priv->descendent_branches;
 }
 
 int
