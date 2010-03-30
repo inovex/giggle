@@ -837,6 +837,9 @@ giggle_view_history_history_init (GiggleHistoryIface *iface)
 static void
 giggle_view_history_init (GiggleViewHistory *view)
 {
+	view->priv = G_TYPE_INSTANCE_GET_PRIVATE (view,
+	                                          GIGGLE_TYPE_VIEW_HISTORY,
+	                                          GiggleViewHistoryPriv);
 }
 
 GtkWidget *
