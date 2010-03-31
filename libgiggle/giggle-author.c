@@ -80,8 +80,10 @@ author_set_string (GiggleAuthorPriv *priv,
 	if (G_UNLIKELY (!regex)) {
 		regex = g_regex_new ("^\\s*([^<]+?)?\\s*(?:<([^>]+)>)?\\s*$",
 				     G_REGEX_OPTIMIZE | G_REGEX_RAW, 0, &error);
-		g_warning ("%s", error->message);
-		g_error_free (error);
+		if (error) {
+			g_warning ("%s", error->message);
+			g_error_free (error);
+		}
 	}
 
 	if (g_regex_match (regex, priv->string, 0, &match)) {
