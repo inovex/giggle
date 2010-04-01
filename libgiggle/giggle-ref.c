@@ -179,15 +179,17 @@ giggle_ref_new (const gchar *name)
 G_CONST_RETURN gchar *
 giggle_ref_get_name (GiggleRef *ref)
 {
-	g_return_val_if_fail (GIGGLE_IS_REF (ref), NULL);
+	if (G_LIKELY (ref))
+		return ref->priv->name;
 
-	return ref->priv->name;
+	return NULL;
 }
 
 G_CONST_RETURN gchar *
 giggle_ref_get_sha (GiggleRef *ref)
 {
-	g_return_val_if_fail (GIGGLE_IS_REF (ref), NULL);
+	if (G_LIKELY (ref))
+		return ref->priv->sha;
 
-	return ref->priv->sha;
+	return NULL;
 }
