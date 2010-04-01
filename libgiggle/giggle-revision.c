@@ -259,7 +259,10 @@ giggle_revision_set_author (GiggleRevision *revision,
 {
 	g_return_if_fail (GIGGLE_IS_REVISION (revision));
 	g_return_if_fail (GIGGLE_IS_AUTHOR (author) | !author);
-	g_object_set (revision, "author", author, NULL);
+
+	if (revision->priv->author)
+		g_object_unref (revision->priv->author);
+	revision->priv->author = g_object_ref (author);
 }
 
 GiggleAuthor *
@@ -276,7 +279,10 @@ giggle_revision_set_committer (GiggleRevision *revision,
 {
 	g_return_if_fail (GIGGLE_IS_REVISION (revision));
 	g_return_if_fail (GIGGLE_IS_AUTHOR (committer) | !committer);
-	g_object_set (revision, "committer", committer, NULL);
+
+	if (revision->priv->committer)
+		g_object_unref (revision->priv->committer);
+	revision->priv->committer = g_object_ref (committer);
 }
 
 const struct tm *
@@ -293,7 +299,9 @@ giggle_revision_set_date (GiggleRevision  *revision,
 {
 	g_return_if_fail (GIGGLE_IS_REVISION (revision));
 	g_return_if_fail (NULL != date);
-	g_object_set (revision, "date", date, NULL);
+
+	g_free (revision->priv->date);
+	revision->priv->date = date;
 }
 
 const gchar *
@@ -309,7 +317,9 @@ giggle_revision_set_short_log (GiggleRevision *revision,
 			       const char     *short_log)
 {
 	g_return_if_fail (GIGGLE_IS_REVISION (revision));
-	g_object_set (revision, "short-log", short_log, NULL);
+
+	g_free (revision->priv->short_log);
+	revision->priv->short_log = g_strdup (short_log);
 }
 
 static void
