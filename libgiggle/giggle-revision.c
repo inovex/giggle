@@ -60,38 +60,30 @@ revision_set_property (GObject      *object,
 		       const GValue *value,
 		       GParamSpec   *pspec)
 {
-	GiggleRevisionPriv *priv;
+	GiggleRevision *revision;
 
-	priv = GIGGLE_REVISION (object)->priv;
+	revision = GIGGLE_REVISION (object);
 
 	switch (param_id) {
 	case PROP_SHA:
-		g_free (priv->sha);
-		priv->sha = g_value_dup_string (value);
+		g_free (revision->priv->sha);
+		revision->priv->sha = g_value_dup_string (value);
 		break;
 
 	case PROP_AUTHOR:
-		if (priv->author)
-			g_object_unref (priv->author);
-
-		priv->author = g_value_dup_object (value);
+		giggle_revision_set_author (revision, g_value_dup_object (value));
 		break;
 
 	case PROP_COMMITTER:
-		if (priv->committer)
-			g_object_unref (priv->committer);
-
-		priv->committer = g_value_dup_object (value);
+		giggle_revision_set_committer (revision, g_value_dup_object (value));
 		break;
 
 	case PROP_DATE:
-		g_free (priv->date);
-		priv->date = g_value_get_pointer (value);
+		giggle_revision_set_date (revision, g_value_get_pointer (value));
 		break;
 
 	case PROP_SHORT_LOG:
-		g_free (priv->short_log);
-		priv->short_log = g_value_dup_string (value);
+		giggle_revision_set_short_log (revision, g_value_dup_string (value));
 		break;
 
 	default:
