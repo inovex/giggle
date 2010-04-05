@@ -11,7 +11,8 @@ AM_CPPFLAGS = \
 check_PROGRAMS = \
 	check-bare
 
-TESTS = $(check_PROGRAMS)
+TESTS = $(check_PROGRAMS) \
+	test_gtkbuilder_file_validation.sh
 
 EXTRA_DIST = \
 	multi-root.git/index \
