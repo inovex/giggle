@@ -71,11 +71,11 @@ revision_set_property (GObject      *object,
 		break;
 
 	case PROP_AUTHOR:
-		giggle_revision_set_author (revision, g_value_dup_object (value));
+		giggle_revision_set_author (revision, g_value_get_object (value));
 		break;
 
 	case PROP_COMMITTER:
-		giggle_revision_set_committer (revision, g_value_dup_object (value));
+		giggle_revision_set_committer (revision, g_value_get_object (value));
 		break;
 
 	case PROP_DATE:
@@ -83,7 +83,7 @@ revision_set_property (GObject      *object,
 		break;
 
 	case PROP_SHORT_LOG:
-		giggle_revision_set_short_log (revision, g_value_dup_string (value));
+		giggle_revision_set_short_log (revision, g_value_get_string (value));
 		break;
 
 	default:
