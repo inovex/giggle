@@ -928,15 +928,24 @@ window_action_about_cb (GtkAction    *action,
 		"Mikael Hallendal",
 		"Richard Hult",
 		"Sven Herzberg",
+		"",
+		_("Contributors:"),
+		"Javier Jardón",
+		"Łukasz Jernaś",
+		"Guilhem Bonnefille",
+		"Florian Müllner",
 		NULL
 	};
 
+	/*
 	const gchar *documenters[] = {
 		NULL
 	};
+	*/
 
 	const gchar *copyright = _("Copyright © 2007 - 2008 Imendio AB\n"
-	                           "Copyright © 2008 - 2010 Mathias Hasselmann");
+	                           "Copyright © 2008 - 2009 Mathias Hasselmann\n"
+	                           "Copyright © 2009 - 2010 The Giggle authors");
 
 	const gchar *license[] = {
 		N_("This program is free software; you can redistribute it and/or modify "
