@@ -293,7 +293,7 @@ giggle_revision_set_date (GiggleRevision  *revision,
 	g_return_if_fail (NULL != date);
 
 	g_free (revision->priv->date);
-	revision->priv->date = date;
+	revision->priv->date = (struct tm*) date;
 }
 
 const gchar *
