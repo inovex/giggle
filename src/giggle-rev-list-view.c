@@ -1663,7 +1663,7 @@ giggle_rev_list_view_init (GiggleRevListView *rev_list_view)
 	GtkActionEntry menu_items [] = {
 		{ "Commit",         NULL,                 N_("Commit"),         NULL, NULL, G_CALLBACK (rev_list_view_commit) },
 		{ "CreateBranch",   NULL,                 N_("Create _Branch"), NULL, NULL, G_CALLBACK (rev_list_view_create_branch) },
-		{ "CreateTag",      "stock_add-bookmark", N_("Create _Tag"),    NULL, NULL, G_CALLBACK (rev_list_view_create_tag) },
+		{ "CreateTag",      "bookmark-new",       N_("Create _Tag"),    NULL, NULL, G_CALLBACK (rev_list_view_create_tag) },
 		{ "CreatePatch",    NULL,                 N_("Create _Patch"),  NULL, NULL, G_CALLBACK (rev_list_view_create_patch) },
 	};
 
