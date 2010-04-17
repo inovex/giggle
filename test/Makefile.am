@@ -14,6 +14,10 @@ check_PROGRAMS = \
 TESTS = $(check_PROGRAMS) \
 	test_gtkbuilder_file_validation.sh
 
+dist_noinst_SCRIPTS = \
+	test_gtkbuilder_file_validation.sh
+
+
 EXTRA_DIST = \
 	multi-root.git/index \
 	multi-root.git/refs/heads/master \
