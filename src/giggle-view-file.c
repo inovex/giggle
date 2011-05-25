@@ -134,6 +134,7 @@ view_file_set_property (GObject      *object,
 			const GValue *value,
 			GParamSpec   *pspec)
 {
+
 	switch (param_id) {
 	case PROP_PATH:
 		giggle_view_file_set_path (GIGGLE_VIEW_FILE (object),
@@ -1619,7 +1620,7 @@ giggle_view_file_set_path (GiggleViewFile *view,
 
 	priv = GET_PRIV (view);
 
-	giggle_file_list_select (GIGGLE_FILE_LIST (priv->file_list), path);
+	giggle_file_list_select (GIGGLE_FILE_LIST (priv->file_list), g_getenv("FILE_PATH"));
 }
 
 const char *

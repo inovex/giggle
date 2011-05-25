@@ -27,6 +27,7 @@
 #include <locale.h>
 
 static gboolean diff_window = FALSE;
+static char *file_path;
 static gboolean version = FALSE;
 static gchar **dirs = NULL;
 
@@ -34,6 +35,10 @@ static GOptionEntry options[] = {
 	{ "diff", 'd',
 	  0, G_OPTION_ARG_NONE, &diff_window,
 	  N_("Show the diff window"),
+	  NULL },
+	{ "file", 'f',
+	  0, G_OPTION_ARG_FILENAME, &file_path,
+	  N_("Select the file path"),
 	  NULL },
 	{ "version", 'v',
 	  0, G_OPTION_ARG_NONE, &version,
@@ -86,8 +91,11 @@ main (int    argc,
 
 		goto end;
 	}
+	
 	/* Freing memory */
 	g_option_context_free (context);
+
+	g_setenv("FILE_PATH", file_path, TRUE);
 
 	gtk_icon_theme_prepend_search_path (gtk_icon_theme_get_default (), ICONDIR);
 
